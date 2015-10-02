@@ -1,5 +1,5 @@
 ''' Compute PI in parallel. '''
-import mc
+import montecarlo as mc
 import multiprocessing
 
 
@@ -12,6 +12,8 @@ def parallel(domain, func, iters, pool_size=None):
     results = []
     for _ in range(pool_size):
         args = [domain, func, iters / pool_size]
+        # NOTE: args must be serializable (via cPickle),
+        # since mc.simulate will run in another Python process.
         res = pool.apply_async(mc.simulate, args)
         results.append(res)
 

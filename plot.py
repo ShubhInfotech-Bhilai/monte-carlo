@@ -1,5 +1,5 @@
 ''' Compute and plot the "XOR" of two circles. '''
-import mc
+import montecarlo as mc
 from matplotlib import pyplot as plt
 
 

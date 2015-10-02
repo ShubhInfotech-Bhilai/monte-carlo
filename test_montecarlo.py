@@ -1,4 +1,4 @@
-import mc
+import montecarlo as mc
 import math
 import random
 import unittest
