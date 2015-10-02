@@ -1,4 +1,13 @@
-import itertools
+'''Simple Monte-Carlo module.
+
+Usage:
+    >>> d = Domain([(0, 1), (0, 1)])
+    >>> f = lambda x, y: y < x*x
+    >>> area = simulation(d, f, n=10**5)
+    >>> round(area, 2)
+    0.33
+'''
+
 import functools
 import random
 
@@ -9,28 +18,29 @@ class Domain(object):
         if rand is None:
             rand = random.Random()
 
-        volume = 1
-        for r in ranges:
-            volume = volume * (r[1] - r[0])
-        self._volume = volume
+        self._volume = 1
+        for low, high in ranges:
+            self._volume *= (high - low)
 
-        _dists = []
-        for r in ranges:
-            dist = functools.partial(rand.uniform, r[0], r[1])
-            _dists.append(dist)
-        self._dists = _dists
+        self._samplers = []
+        for low, high in ranges:
+            sampler = functools.partial(rand.uniform, low, high)
+            self._samplers.append(sampler)
 
-    def rand_point(self):
-        return [d() for d in self._dists]
+    def sample(self):
+        ''' Uniformly sample domain. '''
+        return [s() for s in self._samplers]
 
     @property
     def volume(self):
+        ''' Return pre-computed domain's volume. '''
         return self._volume
 
-def simulation(domain, func, n):
+
+def simulation(domain, func, iters):
     ''' Runs Monte-Carlo simulation on specified *domain*. '''
-    points = (domain.rand_point() for i in xrange(n))
+    points = (domain.sample() for _ in xrange(iters))
     values = (func(*p) for p in points)
     total = sum(values)
-    ratio = total / float(n)
+    ratio = total / float(iters)
     return ratio * domain.volume
