@@ -1,2 +1,38 @@
-Monte-Carlo simulation
-======================
+Monte-Carlo exercise
+====================
+
+The goal is to implement Monte-Carlo numerical solver module in Python.
+
+Day 1.
+- Explain the concept and provide examples.
+- Learn about the random module.
+- Prototype with toy examples (compute circle area).
+- Think about design considerations and tests.
+
+Day 2-3.
+- Implement initial version for solving the 2D problem.
+- Run test suite via py.test.
+- Collect and maximize code coverage.
+- Validate pep8/pylint.
+- Use tox for automation (tests, coverage, lint).
+- Generalize to 3D case.
+- Optimize memory usage -> O(1)
+
+Day 4.
+- Add command-line tool for invoking the solver on specific problem.
+	* use logging for initialization and result reporting
+	* use argparse for `iters` specification
+- Use `matplotlib` to visualize resulting sample points.
+- Use `cProfile` to optimize the solver's performance.
+
+Day 5.
+- Use `multiprocessing` to spread the work on CPU cores.
+	* use argparse for pool size specification.
+	* experiment and report optimal pool size.
+- Use `numpy` for vectorization of loops.
+
+Extra.
+- Import function from configuration Python file.
+	* use "path.to.module:func" notation.
+- Specify domain from command-line arguments.
+ 	* use your own notation.

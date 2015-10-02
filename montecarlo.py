@@ -1,4 +1,4 @@
-'''Simple Monte-Carlo module. '''
+''' Monte-Carlo simulation module. '''
 
 import functools
 import random
@@ -37,7 +37,7 @@ class Simulation(object):
         return ratio * self.volume
 
 
-def simulate(domain, func, iters):
+def simulate(domain, func, iters, rand=None):
     ''' Helper function. '''
-    dom = Simulation(domain)
+    dom = Simulation(domain, rand)
     return dom.run(func, iters)
