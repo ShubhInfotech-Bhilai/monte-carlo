@@ -27,7 +27,7 @@ def func(x, y):
 
 def main():
     dom = [(-1, 1), (-1, 1)]
-    area = mc.parallel(dom, func, iters=10**7)
+    area = parallel(dom, func, iters=10**7)
     msg = 'Area: {:.5f}'.format(area)
     print msg
 
