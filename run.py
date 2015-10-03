@@ -7,6 +7,7 @@ import time
 
 log = logging.getLogger(__name__)
 
+
 def parallel(domain, func, iters, pool_size=None):
     ''' Run simulation in parallel using multiprocessing. '''
     if pool_size is None:
