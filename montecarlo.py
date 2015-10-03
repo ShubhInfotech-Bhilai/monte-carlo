@@ -2,6 +2,9 @@
 
 import functools
 import random
+import logging
+
+log = logging.getLogger(__name__)
 
 
 class Simulation(object):
@@ -32,8 +35,10 @@ class Simulation(object):
         ''' Runs Monte-Carlo simulation on specified *domain*. '''
         points = (self.sample() for _ in xrange(iters))
         values = (func(*p) for p in points)
+        log.debug('starting %d iters', iters)
         total = sum(values)
         ratio = total / float(iters)
+        log.debug('ratio: %.3f', ratio)
         return ratio * self.volume
 
 
